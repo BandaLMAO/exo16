@@ -1,10 +1,14 @@
 # Start from the code-server Debian base image
-FROM codercom/code-server:4.0.2
+FROM codercom/code-server:4.2.0
 
 USER coder
 
 # Apply VS Code settings
 COPY deploy-container/settings.json .local/share/code-server/User/settings.json
+
+# Install nodejs
+RUN sudo curl -fsSL https://deb.nodesource.com/setup_16.x | sudo bash -
+RUN sudo apt-get install -y nodejs
 
 # Use bash shell
 ENV SHELL=/bin/bash
